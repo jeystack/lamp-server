@@ -1,0 +1,27 @@
+# Secrets
+.env
+*.secret
+*.key
+*.pem
+secrets/
+*.iso
+
+# Database files
+*.db
+*.sqlite
+*.sql
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+.obsidian/
