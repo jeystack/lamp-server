@@ -112,7 +112,7 @@
 
 ![Proxmox's fixed IP](../screenshots/proxmox-fixed-ip-addr.png)
 
-- After that I checked if my proxmox server has an static IP address or if my router gave it an IP-Address through DHCP-Server.
+- After that I checked if my proxmox server has an static IP address or if my router gave it an IP address through DHCP-Server.
 
 ```bash
 
