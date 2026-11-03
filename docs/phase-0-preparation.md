@@ -1,5 +1,5 @@
 # Phase 0
-**Redaction:** I black out private network addresses, MAC addresses, and any router/account identifiers; I keep non-sensitive usernames, the local hostname `pve01`, and the general network structure visible because they are needed to understand the setup.
+**Redaction:** I black out private network addresses, MAC addresses, and any router/account identifiers. I keep non-sensitive usernames, the local hostname `pve01`, and the general network structure visible because they are needed to understand the setup.
 
 ### Upload or URL?
 - I decided to download the ISO using Proxmox's "Download from URL" option because:
