@@ -9,10 +9,10 @@
 
 
 #### Download Site debian.org:
-![Download Site Debian.org](../screenshots/download-debian-iso.png)
+![Download Site Debian.org](../screenshots/phase-0/download-debian-iso.png)
 
 #### Checksum:
-![Checksum](../screenshots/checksum.png)
+![Checksum](../screenshots/phase-0/checksum.png)
 
 ---
 
@@ -28,13 +28,13 @@
 - Debian’s installation documentation describes comparing the ISO’s sha256sum output with the corresponding entry in SHA256SUMS. ([Debian Installation Guide](https://www.debian.org/releases/stable/amd64/ch04s07.en.html))
 
 #### Verification of checksum:
-![Verification of Checksum](../screenshots/checksum-verification.png)
+![Verification of Checksum](../screenshots/phase-0/checksum-verification.png)
 
 #### Finished ISO download:
-![Finished ISO download](../screenshots/finished-iso-download.png)
+![Finished ISO download](../screenshots/phase-0/finished-iso-download.png)
 
 #### Debian ISO image in Proxmox:
-![Debian ISO image in Proxmox](../screenshots/debian-iso-image-in-node.png)
+![Debian ISO image in Proxmox](../screenshots/phase-0/debian-iso-image-in-node.png)
 
 ---
 
@@ -51,23 +51,23 @@
 6. Enter the confirmed hash in Proxmox.
 
 #### GPG Error:
-![GPG-Error](../screenshots/gpg-error.png)
+![GPG-Error](../screenshots/phase-0/gpg-error.png)
 
 #### After GPG Installation:
-![After-GPG-Installation](../screenshots/check-after-gpg-install.png)
+![After-GPG-Installation](../screenshots/phase-0/check-after-gpg-install.png)
 
 #### Bad Signature:
-![Bad Signature](../screenshots/bad-signature.png)
+![Bad Signature](../screenshots/phase-0/bad-signature.png)
 
 #### GPG Verification Error:
-![GPG Verification Error](../screenshots/gpg-verification-fail-error.png)
+![GPG Verification Error](../screenshots/phase-0/gpg-verification-fail-error.png)
 
 #### Changing to SHA256SUMS:
-![Changing to SHA256SUMS](../screenshots/after-changing-to-256sums.png)
+![Changing to SHA256SUMS](../screenshots/phase-0/after-changing-to-256sums.png)
 
 #### Signature check finally worked!!!:
 
-![Signature check finally worked](../screenshots/signature-check-finally-worked.png)
+![Signature check finally worked](../screenshots/phase-0/signature-check-finally-worked.png)
 
 - The primary key fingerprint shown by GPG matches Debian’s official Debian CD signing-key fingerprint (`DF9B 9C49 EAA9 2984 3258 9D76 DA87 E80D 6294 BE9B`) on Debian’s verification page. ([Debian](https://www.debian.org/CD/verify))
 
@@ -97,36 +97,47 @@
 #### Proxmox in home network:
 - I went into my router configuration interface and checked if my proxmox server is actually in my home network.
 
-![Proxmox in Home Network](../screenshots/proxmox-host-in-home-network.png)
+![Proxmox in Home Network](../screenshots/phase-0/proxmox-host-in-home-network.png)
 
 #### IP Settings for Proxmox in home network:
 - The checkbox only controls whether the DHCP server keeps assigning the same lease to that device.
 - It does not affect an address the device configures itself.
-- Since I have set up an static IP address outside the DHCP range for my Proxmox server, it isn't a problem that the box is not checked.
+- Since I have set up a static IP address outside the DHCP range for my Proxmox server, it isn't a problem that the box is not checked.
 
-![IP settings for Proxmox in Home Network](../screenshots/ip-settings-proxmox-host.png)
+![IP settings for Proxmox in Home Network](../screenshots/phase-0/ip-settings-proxmox-host.png)
 
 #### Proxmox's fixed IP:
-- I made a check on that. Now I had to look if my proxmox server has an static IP address or not.
+- I made a check on that. Now I had to look if my proxmox server has a static IP address or not.
 - The first look was inside the Web UI.
 
-![Proxmox's fixed IP](../screenshots/proxmox-fixed-ip-addr.png)
+![Proxmox's fixed IP](../screenshots/phase-0/proxmox-fixed-ip-addr.png)
 
-- After that I checked if my proxmox server has an static IP address or if my router gave it an IP address through DHCP-Server.
+- After that I checked if my proxmox server has a static IP address or if my router gave it an IP address through DHCP server.
 
 ```bash
-
 cat /etc/network/interfaces
 ```
 
 #### Shell confirmation - Proxmox has static IP:
 - This was the outcome:
 
-![Shell confirm - Proxmox in home Network](../screenshots/proxmox-host-in-home-network-shell-check.png)
+![Shell confirm - Proxmox in home Network](../screenshots/phase-0/proxmox-host-in-home-network-shell-check.png)
+
+### Ethernet Switch with static IP:
+- I assigned my Ethernet switch a static IP address outside the DHCP range so that it does not depend on the DHCP server, its address never changes, and the DHCP server can never assign this address to another device.
+- I chose this over a DHCP reservation because a reservation depends on the FRITZ!Box and would be lost after a reset or replacement of the router.
+
+![Switch IP settings – DHCP disabled](../screenshots/phase-0/netswitch-no-dhcp.png)
+
+### Ping test new IP from network switch:
+- I pinged the switch’s new IP address and received 4/4 replies with 0 % packet loss.
+
+![Ping test for switch's new IP](../screenshots/phase-0/newip-netswitch-pingtest.png)
 
 | Components | Usecase |
 |------------|---------|
 | LENOVO ThinkCentre M920q | Host-machine |
+| TP-Link TL-SG108E 8-Port Gigabit Switch | Ethernet Switch |
 | Proxmox VE v9.2 | Virtualization Software (Serverhost) |
 | Debian 13, Codename: *trixie* -> debian-13.7.0-amd64-netinst.iso | VM OS |
 
@@ -148,7 +159,7 @@ sudo nmap -sn -PR 192.168.x.x-x 192.168.x.x-x
 - It is a useful cross-check, but it doesn’t prove an address is free
 - I pinged some IP addresses outside the DHCP range and chose one for the LAMP VM.
 
-![Nmap scan](../screenshots/nmap-scan.png)
+![Nmap scan](../screenshots/phase-0/nmap-scan.png)
 
 #### Ping selected LAMP IP address:
 - I chose one IP address for my LAMP VM and to test if this IP is really not in use I pinged it with:
@@ -160,11 +171,11 @@ ping 192.168.x.x -c 4
 - The behaviour and options of `ping` are documented in the online `iputils` manual page. ([ping(8) — man7.org](https://man7.org/linux/man-pages/man8/ping.8.html))
 - The `Destination Host Unreachable` message was not sent by the target IP. It came from my own host after ARP could not resolve a MAC address for the target, so it indicates that no device answered at that address rather than that the target actively rejected the ping (own conclusion from the observed ARP behaviour).
 
-![Ping selected IP](../screenshots/ping-selected-lamp-ip.png)
+![Ping selected IP](../screenshots/phase-0/ping-selected-lamp-ip.png)
 
 | Device | IP | Static/DHCP | Purpose |
 |--------|----|-------------|---------|
 | FRITZ!Box | 192.168.x.x | static | Gateway, DHCP .20-.200 |
-| sw-buero | 192.168.x.x | DHCP | Managed switch |
+| sw-buero | 192.168.x.x | static | Managed Ethernet Switch |
 | pve01 | 192.168.x.x | static | Proxmox host |
 | LAMP VM | 192.168.x.x | static | host+1, so related servers sit next to each other and are easy to find |
