@@ -1,5 +1,5 @@
 # Phase 0
-**Redaction:** I black out private network addresses, MAC addresses, and any router/account identifiers. I keep non-sensitive usernames, the local hostname `pve01`, and the general network structure visible because they are needed to understand the setup.
+**Redaction:** I black out private network addresses, MAC addresses, usernames and any router/account identifiers. I keep the lab hostname pve01 and the general network structure visible because they are needed to understand the setup.
 
 ### Upload or URL?
 - I decided to download the ISO using Proxmox's "Download from URL" option because:
@@ -125,7 +125,7 @@ cat /etc/network/interfaces
 
 ### Ethernet Switch with static IP:
 - I assigned my Ethernet switch a static IP address outside the DHCP range so that it does not depend on the DHCP server, its address never changes, and the DHCP server can never assign this address to another device.
-- I chose this over a DHCP reservation because a reservation depends on the FRITZ!Box and would be lost after a reset or replacement of the router.
+- I chose this over a DHCP reservation because a reservation depends on the home router and would be lost after a reset or replacement of the router.
 
 ![Switch IP settings – DHCP disabled](../screenshots/phase-0/netswitch-no-dhcp.png)
 
@@ -175,7 +175,7 @@ ping 192.168.x.x -c 4
 
 | Device | IP | Static/DHCP | Purpose |
 |--------|----|-------------|---------|
-| FRITZ!Box | 192.168.x.x | static | Gateway, DHCP .20-.200 |
+| Home router | <home-subnet> | static | Gateway, DHCP |
 | sw-buero | 192.168.x.x | static | Managed Ethernet Switch |
 | pve01 | 192.168.x.x | static | Proxmox host |
 | LAMP VM | 192.168.x.x | static | host+1, so related servers sit next to each other and are easy to find |
